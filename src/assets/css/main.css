@@ -1,0 +1,31 @@
+@import './tailwind.css';
+@import './highlighter.css';
+
+body {
+  font-family: "Poppins";
+}
+
+.route-enter-from,
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.route-enter-active,
+.route-leave-active {
+  transition: all 0.3s ease;
+}
+
+.route-enter-to,
+.route-leave-from {
+  opacity: 0.4;
+  transform: translateY(0);
+}
+
+.line-break {
+  height: 2rem;
+  width: 1px;
+  display: flex;
+  background-color: teal;
+  align-self: center;
+}
