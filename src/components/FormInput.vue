@@ -9,7 +9,11 @@
       :placeholder="placeholder"
       :required="isRequired"
       :value="value"
-      @input="valChange"
+      @input="
+        inputType === number
+          ? $emit('update:inputData', parseInt($event.target.value))
+          : $emit('update:inputData', $event.target.value)
+      "
     />
   </div>
 </template>
@@ -29,18 +33,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  setup(props, context) {
-    function valChange(e) {
-      if (props.inputType === "number") {
-        context.emit("input-change", parseInt(e.target.value));
-      } else {
-        context.emit("input-change", e.target.value);
-      }
-    }
-    return {
-      valChange
-    };
   }
 };
 </script>

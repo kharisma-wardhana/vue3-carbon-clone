@@ -1,15 +1,17 @@
 <template>
-  <header>
+  <header class="fixed fixed-top min-w-full">
     <AppBar />
   </header>
-  <main>
+  <main class="pt-16 min-h-screen">
     <router-view v-slot="slotProps">
       <transition name="route" mode="out-in">
         <component :is="slotProps.Component"></component>
       </transition>
     </router-view>
   </main>
-  <footer></footer>
+  <footer class="py-5 bg-gray-700 text-center text-white">
+    Made with Love & Vue {{ new Date().getFullYear() }}
+  </footer>
   <Notification />
 </template>
 

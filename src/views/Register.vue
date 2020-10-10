@@ -10,7 +10,8 @@
         placeholder="Username"
         label="Username"
         :isRequired="true"
-        @input-change="getUsername"
+        :value="username"
+        v-model:inputData="username"
       />
       <div class="container text-center mb-5">
         <Button btnName="Register" />
@@ -43,10 +44,6 @@ export default {
     const router = useRouter();
     const username = ref("");
 
-    function getUsername(val) {
-      username.value = val;
-    }
-
     function userSignUp() {
       store.dispatch("user/signUp", { username: username.value });
       router.replace("/");
@@ -54,7 +51,6 @@ export default {
 
     return {
       username,
-      getUsername,
       userSignUp
     };
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center md:mt-24">
+  <div class="flex justify-center mt-16 md:mt-24">
     <form
       class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4"
       @submit.prevent="userLogin"
@@ -10,13 +10,11 @@
         placeholder="Input Username"
         label="Username"
         :isRequired="true"
-        @input-change="getUsername"
+        :value="username"
+        v-model:inputData="username"
       />
       <div class="container text-center mb-5">
-        <Button
-          btnName="Login"
-          :isDisabled="this.$store.state.notif.isVisible"
-        />
+        <Button btnName="Login" :isDisabled="$store.state.notif.isVisible" />
       </div>
 
       <span>
@@ -55,15 +53,9 @@ export default {
         router.replace("/");
       }
     }
-
-    function getUsername(val) {
-      username.value = val;
-    }
-
     return {
       username,
-      userLogin,
-      getUsername
+      userLogin
     };
   }
 };

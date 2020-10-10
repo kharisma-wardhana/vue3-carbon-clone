@@ -1,11 +1,6 @@
 <template>
   <div class="bg-gray-700">
-    <data-code
-      v-show="code.length > 0"
-      :code="code"
-      :lang="lang"
-      :is-highlighted="isHighlight"
-    />
+    <div class="overflow-x-hidden" v-html="code"></div>
     <button v-if="codeId" @click="removeCode">
       Remove
     </button>
@@ -26,15 +21,6 @@ export default {
       default: "",
       required: true,
       validator
-    },
-    lang: {
-      default: "",
-      required: true,
-      validator
-    },
-    isHighlight: {
-      type: Number,
-      default: 1
     }
   },
   methods: {
@@ -42,7 +28,7 @@ export default {
       const valConfirm = confirm("Are you sure to delete this code?");
       if (valConfirm && this.codeId) {
         await this.$store.dispatch("code/delCode", {
-          userId: this.$store.state.pengguna.userId,
+          userId: this.$store.state.user.userId,
           codeId: this.codeId
         });
         await this.$emit("deleted");

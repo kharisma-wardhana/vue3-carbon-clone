@@ -1,6 +1,30 @@
 <template>
   <teleport to="body">
-    <div v-show="$store.state.notif.isVisible" class="backdrop"></div>
+    <div
+      v-show="$store.state.notif.isVisible || $store.state.process.isVisible"
+      class="backdrop"
+    ></div>
+    <svg
+      v-show="$store.state.process.isVisible"
+      class="loading-data animate-spin h-16 w-16 text-teal-700"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
     <div
       v-show="$store.state.notif.isVisible"
       class="flex justify-center md:mt-24 notif"
@@ -40,6 +64,12 @@ export default {
   top: 20vh;
   left: 10%;
   width: 80%;
+  z-index: 100;
+}
+.loading-data {
+  position: fixed;
+  top: 35vh;
+  left: 45vw;
   z-index: 100;
 }
 </style>

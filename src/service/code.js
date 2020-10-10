@@ -30,9 +30,9 @@ async function saveCode(userId, contentData) {
     user: userId,
     content: {
       code: contentData.code,
-      lang: contentData.programLang,
+      lang: contentData.lang,
       highlight: contentData.highlight,
-      fileName: contentData.fileName,
+      fileName: contentData.filename,
       twoslash: contentData.twoslash
     }
   };
@@ -79,10 +79,11 @@ async function getHighlighted(dataCode, download) {
       twoslash: dataCode.selectedSlash,
       download
     }
-  }
-  const url = stringifyUrl(objURL, STRINGIFY_OPTION)
+  };
 
-  return await sendData(url, { code: dataCode.inputCode })
+  const url = stringifyUrl(objURL, STRINGIFY_OPTION);
+
+  return await sendData(url, { code: dataCode.inputCode });
 }
 
 export { getAllCode, saveCode, editCode, delCode, getHighlighted };

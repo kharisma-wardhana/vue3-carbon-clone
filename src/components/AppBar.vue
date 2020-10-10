@@ -118,13 +118,6 @@
           </div>
         </div>
         <div class="mt-3 px-2 space-y-1">
-          <a
-            href="#"
-            class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-          >
-            Your Profile
-          </a>
-
           <button
             class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
             @click="signOut"
@@ -150,11 +143,13 @@ export default {
   },
   created() {
     const user = JSON.parse(localStorage.getItem("user"));
-    this.$store.commit("user/setUser", {
-      userId: user.userId,
-      username: user.username,
-      isLogin: user.isLogin
-    });
+    if (user != null) {
+      this.$store.commit("user/setUser", {
+        userId: user.userId,
+        username: user.username,
+        isLogin: user.isLogin
+      });
+    }
   },
   setup() {
     const isExpandMenu = ref(false);

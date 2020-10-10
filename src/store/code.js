@@ -46,6 +46,7 @@ const actions = {
     try {
       dispatch("process/showProcess", null, { root: true });
 
+      console.log(contentData);
       const respon = await saveCode(userId, contentData);
 
       if (respon.success && !respon.error) {

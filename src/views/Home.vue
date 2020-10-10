@@ -1,41 +1,29 @@
 <template>
   <div class="flex flex-wrap bg-gray-300 shadow-md overflow-hidden">
-    <section class="setting md:max-w-xs">
+    <section class="w-full md:max-w-md">
       <SettingEditor
         :inputCode="inputCode"
         :resultHighlight="resultHighlight"
       />
     </section>
-    <section class="rounded px-2 pt-6 pb-8 mb-4">
+    <section class="px-8 pt-6 pb-8 mb-4 flex flex-grow">
       <FormTextArea
         name="InputCode"
         placeholder="Input Your Code"
         label="Input Code"
         :value="inputCode"
         v-model:inputText="inputCode"
+        class="w-full"
       />
     </section>
-    <section class="rounded px-5 pt-6 pb-8 mb-4">
-      <!-- <ResultCode
-        :code="resultHighlight"
-        :lang="this.$store.state.setting.lang"
-      /> -->
-      <!-- <data-code
-        v-show="resultHighlight.length > 0"
-        :code="resultHighlight"
-        :lang="this.$store.state.setting.lang"
-        :is-highlighted="1"
-      /> -->
-      <div v-html="resultHighlight" />
-      <!-- <button @click="removeCode">
-        Remove
-      </button> -->
+    <section class="px-8 pt-6 pb-8 mb-4 w-full">
+      <ResultCode :code="resultHighlight" />
     </section>
   </div>
 </template>
 
 <script>
-// import ResultCode from "../components/section/ResultCode";
+import ResultCode from "../components/section/ResultCode";
 import SettingEditor from "../components/section/SettingEditor";
 import FormTextArea from "../components/FormTextArea";
 import { ref, watch } from "vue";
@@ -47,8 +35,8 @@ export default {
   name: "Home",
   components: {
     SettingEditor,
-    FormTextArea
-    // ResultCode
+    FormTextArea,
+    ResultCode
   },
   setup() {
     const store = useStore();
@@ -60,8 +48,10 @@ export default {
       inputCode,
       debounce(
         function(code) {
-          resultHighlight.value = "";
-          highlighter(code);
+          if (store.state.setting.lang !== "") {
+            resultHighlight.value = "";
+            highlighter(code);
+          }
         },
         { wait: 500 }
       )
@@ -87,7 +77,7 @@ export default {
       } catch (error) {
         const notifErr = {
           isVisible: true,
-          messabe: error.message || "Bahasa Pemrograman dan Kode wajib diisi"
+          messabe: error.message || "Programming Language and Code is Required"
         };
         store.dispatch("notif/showNotification", notifErr);
         console.log(error);

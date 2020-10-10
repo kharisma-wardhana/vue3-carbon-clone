@@ -25,7 +25,7 @@
       id="File Name"
       placeholder="Input File Name"
       :value="setting.filename"
-      v-model:input-change="setting.filename"
+      v-model:inputData="setting.filename"
     />
     <FormInput
       label="Highlight line"
@@ -34,26 +34,20 @@
       placeholder="Input Highlight line"
       inputType="number"
       :value="setting.highlight"
-      v-model:input-change="setting.highlight"
+      v-model:inputData="setting.highlight"
     />
-    <div class="flex flex-wrap">
-      <Button
-        btnName="Reset"
-        @action="resetDataCode"
-        btnType="button"
-        class="mr-3"
-      />
-      <Button
-        v-if="$store.state.user.userId"
-        btnName="Save"
-        @action="saveCode"
-        btnType="button"
-        class="mr-3"
-      />
+    <div class="flex flex-row flex-no-wrap align-middle justify-between mt-4">
+      <Button btnName="Reset" @action="resetDataCode" btnType="button" />
       <Button
         v-if="resultHighlight && resultHighlight.length > 0"
         btnName="Download"
         @action="downloadCode"
+        btnType="button"
+      />
+      <Button
+        v-if="$store.state.user.userId && inputCode.length > 0"
+        btnName="Save"
+        @action="saveCode"
         btnType="button"
       />
     </div>
@@ -96,17 +90,15 @@ export default {
     const listProgramLang = ref([]);
     const listTwoslash = ref(["twoslash", "tsconfig"]);
     const setting = ref({
-      lang: null,
+      lang: "typescript",
       twoslash: null,
       filename: null,
       highlight: null
     });
 
     watchEffect(async () => {
-      if (setting.value.lang !== null) {
-        console.log(setting.value);
-        await store.dispatch("setting/settingCode", { setting: setting.value });
-      }
+      console.log(setting.value);
+      await store.dispatch("setting/settingCode", { setting: setting.value });
     });
 
     async function getListProgramLang() {
@@ -129,13 +121,14 @@ export default {
       try {
         const content = cleanDeep({
           code: props.inputCode,
-          lang: store.state.setting.lang,
-          highlight: store.state.setting.highlight,
-          fileName: store.state.setting.filename,
-          twoslash: store.state.setting.twoslash
+          lang: setting.value.lang,
+          highlight: setting.value.highlight,
+          fileName: setting.value.filename,
+          twoslash: setting.value.twoslash
         });
+        const userData = JSON.parse(localStorage.getItem("user"));
         await store.dispatch("code/saveCode", {
-          userId: store.state.user.userId,
+          userId: userData.userId,
           contentData: content
         });
       } catch (err) {
