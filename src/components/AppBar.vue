@@ -12,13 +12,21 @@
           </router-link>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <router-link
-                v-if="loggedIn"
-                to="/"
-                class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
-              >
-                Home
-              </router-link>
+              <div class="flex px-1 py-2" v-if="loggedIn">
+                <router-link
+                  to="/"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  Home
+                </router-link>
+                <div class="line-break"></div>
+                <router-link
+                  to="/code"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  Code
+                </router-link>
+              </div>
 
               <div class="flex px-1 py-2" v-else>
                 <router-link
@@ -75,26 +83,32 @@
     </div>
     <div :class="isExpandMenu ? 'block' : 'hidden'" class="md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <router-link
-          v-if="loggedIn"
-          to="/"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-          >Home</router-link
-        >
+        <div v-if="loggedIn">
+          <router-link
+            to="/"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+            >Home</router-link
+          >
+          <router-link
+            to="/code"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+            >Code</router-link
+          >
+        </div>
+        <div v-else>
+          <router-link
+            to="/login"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+            >Login</router-link
+          >
 
-        <router-link
-          v-else
-          to="/login"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-          >Login</router-link
-        >
-
-        <router-link
-          to="/register"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-        >
-          Register
-        </router-link>
+          <router-link
+            to="/register"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+          >
+            Register
+          </router-link>
+        </div>
 
         <router-link
           to="/about"

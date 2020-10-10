@@ -33,7 +33,7 @@ const actions = {
       commit("resetListCode");
       const notifErr = {
         isVisible: true,
-        message: error.message || "Silahkan masuk terlebih dahulu"
+        message: error.message ? error.message : "Silahkan masuk terlebih dahulu"
       };
       dispatch("notif/showNotification", notifErr, { root: true });
       console.log(error);
