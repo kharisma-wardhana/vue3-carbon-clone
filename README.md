@@ -1,5 +1,3 @@
-# vue3-pwa-snipcode
-
 ## Tech Stack
 
 <ul>
