@@ -56,8 +56,16 @@
         <div v-if="loggedIn" class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
             <AccountDropdown />
-            <a class="ml-3" href="https://github.com/kharisma-wardhana/vue3-carbon-clone" target="blank"> 
-              <img class="h-8 w-8 rounded-full" src="../assets/user.png" alt="user" />
+            <a
+              class="ml-3"
+              href="https://github.com/kharisma-wardhana/vue3-carbon-clone"
+              target="blank"
+            >
+              <img
+                class="h-8 w-8 rounded-full"
+                src="../assets/user.png"
+                alt="user"
+              />
             </a>
           </div>
         </div>
