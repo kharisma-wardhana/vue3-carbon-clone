@@ -8,7 +8,11 @@
         aria-label="User menu"
         aria-haspopup="true"
       >
-        <img class="h-8 w-8 rounded-full" src="../assets/user.png" alt="user" />
+        <span class="text-white mr-2">{{ username }}</span>
+
+        <svg v-if="isOpen" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200"><path d="M600.002 210.605L421.285 389.336L0 810.559l178.721 178.836l421.281-421.341l421.281 421.341L1200 810.559L778.733 389.336L600.002 210.605z" fill="currentColor"/></svg>
+
+        <svg v-else xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200"><path d="M600.006 989.352l178.709-178.709L1200 389.357l-178.732-178.709L600.006 631.91L178.721 210.648L0 389.369l421.262 421.262l178.721 178.721h.023z" fill="currentColor"/></svg>
       </button>
     </div>
 
@@ -61,6 +65,9 @@ export default {
     const isOpen = ref(false);
     const store = useStore();
     const router = useRouter();
+    const username = ref("");
+
+    username.value = store.state.user.username;
 
     function signOut() {
       console.log("Ouut");
@@ -70,7 +77,8 @@ export default {
     }
     return {
       isOpen,
-      signOut
+      signOut,
+      username
     };
   }
 };
