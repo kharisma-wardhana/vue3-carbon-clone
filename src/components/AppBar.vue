@@ -129,11 +129,16 @@
       <div v-if="loggedIn" class="pt-4 pb-3 border-t border-gray-700">
         <div class="flex items-center px-5 space-x-3">
           <div class="flex-shrink-0">
-            <img
-              class="h-10 w-10 rounded-full"
-              src="../assets/user.png"
-              alt="user"
-            />
+            <a
+              href="https://github.com/kharisma-wardhana/vue3-carbon-clone"
+              target="blank"
+            >
+              <img
+                class="h-10 w-10 rounded-full"
+                src="../assets/user.png"
+                alt="user"
+              />
+            </a>
           </div>
           <div class="space-y-1">
             <div class="text-base font-medium leading-none text-white">
