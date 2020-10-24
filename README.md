@@ -1,4 +1,8 @@
-## Tech Stack
+Learn Vue3 and create Carbon clone (https://carbon.now.sh/) 
+
+Simple project to save and share some snippet code (and download that snipcode into image)
+
+## Tech Stack 
 
 <ul>
   <li>TailwindCSS</li>
